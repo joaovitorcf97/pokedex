@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 
 class DetailPage extends StatelessWidget {
-  final String name;
+  final Pokemon pokemon;
   final List<Pokemon> list;
 
   const DetailPage({
     Key? key,
-    required this.name,
+    required this.pokemon,
     required this.list,
   }) : super(key: key);
 
@@ -15,7 +15,7 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(name),
+        title: Text(pokemon.name),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

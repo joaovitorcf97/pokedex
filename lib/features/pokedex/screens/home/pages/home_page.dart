@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/features/pokedex/screens/details/container/detail_container.dart';
+import 'package:pokedex/features/pokedex/screens/home/pages/widgets/pokemon_item_widget.dart';
 
 class HomePage extends StatelessWidget {
   final List<Pokemon> list;
@@ -15,19 +16,42 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: list.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            onTap: () => onItemTap(
-              '/details',
-              DetailArguments(
-                name: list[index].name,
-              ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Text(
+          'Pokedex',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 26,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.menu,
+              color: Colors.black,
             ),
-            title: Text(list[index].name),
-          );
-        },
+          )
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: GridView.count(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          children: list
+              .map(
+                (e) => PokemonItemWidget(
+                  pokemon: e,
+                  onTap: onItemTap,
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }
